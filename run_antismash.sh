@@ -5,7 +5,7 @@
 #SBATCH -p long
 #SBATCH -n 2
 #SBATCH --ntasks-per-node=1
-#SBATCH -c 88
+#SBATCH -c 44
 #
 
 module load Anaconda3

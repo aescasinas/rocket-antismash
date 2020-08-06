@@ -6,7 +6,7 @@ import argparse
 parser = argparse.ArgumentParser(description='Automate antismash')
 
 parser.add_argument('input_dir', type=str, help='Input directory containing .fastq reads')
-parser.add_argument('-t', '--threads', default=4, help='Number of threads to run Flye (default: 4)')
+parser.add_argument('-t', '--threads', default=4, help='Number of threads to run AntiSMASH (default: 4)')
 parser.add_argument('-p', '--prefix', required=True, type=str, help='Prefix name for BGC regions')
 args = parser.parse_args()
 
@@ -43,7 +43,11 @@ for gbk in gbk_list:
 
     print(f'\n----- Running antismash on {strain_name} ----- ({count}/{len(gbk_list)})\n')
 
-    with open(os.devnull, 'w') as dev_null:
+    log_file = f'{antismash_output_dir}/log.txt'
+    with open(log_file, 'a') as log_txt:
+        log_txt.write(f'--- {strain_name} ---\n')
+
+    with open(log_file, 'a') as log_txt2:
         subprocess.call([
             'antismash',
             '--cb-general',
@@ -55,7 +59,9 @@ for gbk in gbk_list:
             '--cpus',
             f'{num_threads}',
             f'{annotated_dir}/{strain_name}.gbk'
-        ], stdout=dev_null)
+        ], stdout=log_txt2, stderr=log_txt2)
+
+        log_txt2.write('\n')
 
     # os.system(f'antismash --cb-general --cb-knownclusters --genefinding-tool prodigal --output-dir {as_logs_dir}/{strain_name} --cpus {num_threads} {annotated_dir}/{strain_name}.gbk')
 
