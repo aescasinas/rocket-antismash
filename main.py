@@ -43,7 +43,21 @@ for gbk in gbk_list:
 
     print(f'\n----- Running antismash on {strain_name} ----- ({count}/{len(gbk_list)})\n')
 
-    os.system(f'antismash --cb-general --cb-knownclusters --genefinding-tool prodigal --output-dir {as_logs_dir}/{strain_name} --cpus {num_threads} {annotated_dir}/{strain_name}.gbk ')
+    with open(os.devnull, 'w') as dev_null:
+        subprocess.call([
+            'antismash',
+            '--cb-general',
+            '--cb-knownclusters',
+            '--genefinding-tool',
+            'prodigal',
+            '--output-dir',
+            f'{as_logs_dir}/{strain_name}',
+            '--cpus',
+            f'{num_threads}',
+            f'{annotated_dir}/{strain_name}.gbk'
+        ], stdout=dev_null)
+
+    os.system(f'antismash --cb-general --cb-knownclusters --genefinding-tool prodigal --output-dir {as_logs_dir}/{strain_name} --cpus {num_threads} {annotated_dir}/{strain_name}.gbk')
 
     as_strain_dir = f'{as_logs_dir}/{strain_name}' # antismash output dir
 

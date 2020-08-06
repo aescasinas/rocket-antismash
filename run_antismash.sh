@@ -5,13 +5,13 @@
 #SBATCH -p long
 #SBATCH -n 2
 #SBATCH --ntasks-per-node=1
-#SBATCH -c 44
+#SBATCH -c 88
 #
 
 module load Anaconda3
 source activate antismash
 
-THREADS=44
+THREADS=88
 PREFIX=DSM
 
 while getopts "p:" OPTION
