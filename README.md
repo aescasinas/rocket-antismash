@@ -17,5 +17,5 @@ To track the progress of the job. Type `tail slurm-<jobID>` on the Rocket termin
 
 ### Example
 ```sh
-sbatch run_antismash -p DSM path/to/dir
+sbatch run_antismash.sh -p DSM path/to/dir
 ```
