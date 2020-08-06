@@ -57,7 +57,7 @@ for gbk in gbk_list:
             f'{annotated_dir}/{strain_name}.gbk'
         ], stdout=dev_null)
 
-    os.system(f'antismash --cb-general --cb-knownclusters --genefinding-tool prodigal --output-dir {as_logs_dir}/{strain_name} --cpus {num_threads} {annotated_dir}/{strain_name}.gbk')
+    # os.system(f'antismash --cb-general --cb-knownclusters --genefinding-tool prodigal --output-dir {as_logs_dir}/{strain_name} --cpus {num_threads} {annotated_dir}/{strain_name}.gbk')
 
     as_strain_dir = f'{as_logs_dir}/{strain_name}' # antismash output dir
 
